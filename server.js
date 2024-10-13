@@ -1,8 +1,9 @@
 import express from 'express';
 //import sequelize from "./config/connection.js";
-import permanents from './models/permanent.js';
-import employees from './models/employee.js';
-import shift from './models/shift.js';
+// import permanents from './models/permanent.js';
+// import employees from './models/employee.js';
+// import shift from './models/shift.js';
+import shiftRoutes from './routes/shift_routes.js';
 
 const port = 3000;
 const app = express();
@@ -30,20 +31,22 @@ app.use(express.json());
 //     }
 // );
 
-await shift.create(
-    {
-        start_time: "09:00:00",
-        end_time: "17:00:00",
-        target: 30,
-        operation_type:"Cutting",
-        mach_id: "Mach A",
-        shift_duration: 8,
-        shift_date: "2024-10-12",
-        employee_id: 2
-    }
-);
+// await shift.create(
+//     {
+//         start_time: "09:00:00",
+//         end_time: "17:00:00",
+//         target: 30,
+//         operation_type:"Cutting",
+//         mach_id: "Mach A",
+//         shift_duration: 8,
+//         shift_date: "2024-10-12",
+//         employee_id: 2
+//     }
+// );
 
-console.log('shift entry created');
+//console.log('shift entry created');
+
+app.use('/shift',shiftRoutes);
 app.listen(port, ()=>{
     console.log(`Server is running on port ${port}`);
 });
