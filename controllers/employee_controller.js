@@ -1,6 +1,6 @@
-import employees from "../models/employee";
+import employees from "../models/employee.js";
 import crypto from 'crypto';
-import shift from "../models/shift";
+import shift from "../models/shift.js";
 
 const salt = crypto.randomBytes(16).toString('hex');
 const createEmployee = async (req,res) =>{

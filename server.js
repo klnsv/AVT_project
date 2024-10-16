@@ -5,6 +5,8 @@ import express from 'express';
 // import shift from './models/shift.js';
 import shiftRoutes from './routes/shift_routes.js';
 import employeeRoutes from './routes/employee_routes.js';
+import analysisRoutes from './routes/analysis_routes.js';
+
 
 const port = 3000;
 const app = express();
@@ -49,6 +51,7 @@ app.use(express.json());
 
 app.use('/shift',shiftRoutes);
 app.use('/employees',employeeRoutes);
+app.use('/analysis',analysisRoutes);
 app.listen(port, ()=>{
     console.log(`Server is running on port ${port}`);
 });

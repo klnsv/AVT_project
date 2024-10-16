@@ -39,7 +39,7 @@ const addShift = async (req,res)=>{
 
 const deleteShift = async (req,res)=>{
     try{
-        const {shift_id} = req.body;
+        const {shift_id} = req.params;
         const today = new Date();
         const to_destroy_shift = await shift.findOne(
             {
@@ -73,16 +73,16 @@ const deleteShift = async (req,res)=>{
 
 const updateShift = async (req,res)=>{
     try{
+        const {shift_id} = req.params;
         const {
-            shift_id = null,
-            start_time = null,
-            end_time = null,
-            target = null,
-            operation_type = null,
-            mach_id = null,
-            shift_duration = null,
-            shift_date = null,
-            employee_id = null
+            start_time,
+            end_time,
+            target,
+            operation_type,
+            mach_id,
+            shift_duration,
+            shift_date,
+            employee_id
         } = req.body;
     
         const selected_shift = await shift.findOne({
@@ -94,19 +94,18 @@ const updateShift = async (req,res)=>{
         if(!selected_shift){
             return res.status(404).json({msg:`The shift with the given shift_id ${shift_id} cannot be found!!`});
         }
-    
-        await selected_shift.update({
-            shift_id:shift_id,
-            start_time:start_time,
-            end_time:end_time,
-            target:target,
-            operation_type:operation_type,
-            mach_id:mach_id,
-            shift_duration:shift_duration,
-            shift_date:shift_date,
-            employee_id:employee_id
-        });
-        return res.status(200).json({msg:`The shift with the shift_id ${shift_id} has been updated!!`});
+        
+        const updatedFields = {};
+        if (start_time !== undefined) updatedFields.start_time = start_time;
+        if (end_time !== undefined) updatedFields.end_time = end_time;
+        if (target !== undefined) updatedFields.target = target;
+        if (operation_type !== undefined) updatedFields.operation_type = operation_type;
+        if (mach_id !== undefined) updatedFields.mach_id = mach_id;
+        if (shift_duration !== undefined) updatedFields.shift_duration = shift_duration;
+        if (shift_date !== undefined) updatedFields.shift_date = shift_date;
+        if (employee_id !== undefined) updatedFields.employee_id = employee_id;
+        await selected_shift.update(updatedFields);
+        return res.status(200).json({msg:`The shift with the shift_id ${shift_id} has been updated!!`,shift: selected_shift});
     }
     catch(err){
         return res.status(500).json({msg:err.message});
@@ -116,7 +115,7 @@ const updateShift = async (req,res)=>{
 
 const getShiftDetails = async(req,res) =>{
     try{
-        const {shift_id} = req.body;
+        const {shift_id} = req.params;
         const selected_shift = await shift.findOne({
             where:{
                 shift_id:shift_id
