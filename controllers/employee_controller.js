@@ -50,7 +50,15 @@ const editEmployee = async (req,res) =>{
                     }
                 );
             }
-            return res.status(200).json({msg:`Employee record has been changed!,Employee's id is ${employee_id} Employee's new name is ${employee_name}, Employee's new password is ${new_password}`});
+            // return res.status(200).json({msg:`Employee record has been changed!,Employee's id is ${employee_id} Employee's new name is ${employee_name}, Employee's new password is ${new_password}`});
+            return res.status(200).json(
+                {
+                    msg:"Employee record has been changed",
+                    employee_id:employee_id,
+                    employee_name,employee_name,
+                    new_password:new_password
+                }
+            );
         }
     }
     catch(err){
