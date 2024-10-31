@@ -25,11 +25,11 @@ const employees = sequelize.define('employees',{
         allowNull:true,
         defaultValue:0
     },
-    total_shift_hours:{
-        type:DataTypes.FLOAT,
-        allowNull:false,
-        defaultValue:0
-    },
+    // total_shift_hours:{
+    //     type:DataTypes.FLOAT,
+    //     allowNull:false,
+    //     defaultValue:0
+    // },
     total_working_hours:{
         type:DataTypes.FLOAT,
         allowNull:false,
