@@ -445,3 +445,347 @@
             "msg": "Error will be displayed accordingly"
         }
         ```        
+
+6. ### To get cumulative details of all the shifts in a day
+
+    **Function**: fulldayShifts  
+    
+    **Method**: GET
+    
+    **URL**: `http://localhost:3000/analysis/fulldayAnalysis` 
+
+    **req.body**:
+    ```json
+    {
+        "date":"2024-10-21"
+    }
+    ```
+
+    **response**:
+    1. Success:
+        ```json
+        {
+            "proximity_sum": 45,
+            "target": 31,
+            "absentNames": [],
+            "notPresentIDS": [],
+            "notPresentRFIDS": [],
+            "presentNames": [
+                "Sample employee"
+            ],
+            "presentRFIDS": [
+                "RFID007"
+            ],
+            "presentEmployeeDetails": [
+                {
+                    "employee_id": 1,
+                    "employee_name": "Sample employee",
+                    "rfid": "RFID007",
+                    "password": "wasd",
+                    "total_idle_hours": 0.483333,
+                    "total_working_hours": 9.83333,
+                    "total_count": null,
+                    "total_efficiency": 0.28,
+                    "assigned_shift": 4,
+                    "total_targets_met": 7
+                }
+            ],
+            "presentMachs": [
+                "Mach A"
+            ],
+            "presentMachDetails": [
+                {
+                    "MachName": "Mach A",
+                    "target": 30,
+                    "count": 45,
+                    "efficiency": 1.5,
+                    "operatorID": 1,
+                    "idleTime": 5,
+                    "nonWorking": 95
+                }
+            ],
+            "notPresentMachines": [],
+            "idleTime": 5,
+            "nonWorking": 95,
+            "absentEmployeeDetails": []
+        }
+        ```
+    2. Failure:  
+
+        Any other errors
+        ``` json
+        {
+            "msg": "Error will be displayed accordingly"
+        }
+        ```        
+
+7. ### To get cumulative details of all the shifts for each day in a given custom timeframe
+
+    **Function**: getDayAnalysis  
+    
+    **Method**: GET
+    
+    **URL**: `http://localhost:3000/analysis/customDayAnalysis` 
+
+    **req.body**:
+    ```json
+    {
+        "start_date":"2024-10-21",
+        "end_date":"2024-10-30"
+    }
+    ```
+
+    **response**:
+    1. Success:
+        ```json
+        {
+            "msg": {
+                "2024-10-21": {
+                    "proximity_sum": 45,
+                    "target": 31,
+                    "absentNames": [],
+                    "notPresentIDS": [],
+                    "notPresentRFIDS": [],
+                    "presentNames": [
+                        "Sample employee"
+                    ],
+                    "presentRFIDS": [
+                        "RFID007"
+                    ],
+                    "presentEmployeeDetails": [
+                        {
+                            "employee_id": 1,
+                            "employee_name": "Sample employee",
+                            "rfid": "RFID007",
+                            "password": "wasd",
+                            "total_idle_hours": 0.483333,
+                            "total_working_hours": 9.83333,
+                            "total_count": null,
+                            "total_efficiency": 0.28,
+                            "assigned_shift": 4,
+                            "total_targets_met": 7
+                        }
+                    ],
+                    "presentMachs": [
+                        "Mach A"
+                    ],
+                    "presentMachDetails": [
+                        {
+                            "MachName": "Mach A",
+                            "target": 30,
+                            "count": 45,
+                            "efficiency": 1.5,
+                            "operatorID": 1,
+                            "idleTime": 5,
+                            "nonWorking": 95
+                        }
+                    ],
+                    "notPresentMachines": [],
+                    "idleTime": 5,
+                    "nonWorking": 95,
+                    "absentEmployeeDetails": []
+                },
+                "2024-10-22": {
+                    "proximity_sum": 17,
+                    "target": 110,
+                    "absentNames": [
+                        "Sample employee"
+                    ],
+                    "notPresentIDS": [
+                        1
+                    ],
+                    "notPresentRFIDS": [
+                        "RFID007"
+                    ],
+                    "presentNames": [
+                        "Sample 2"
+                    ],
+                    "presentRFIDS": [
+                        "RFID001"
+                    ],
+                    "presentEmployeeDetails": [
+                        {
+                            "employee_id": 2,
+                            "employee_name": "Sample 2",
+                            "rfid": "RFID001",
+                            "password": "omasd",
+                            "total_idle_hours": 0.283333,
+                            "total_working_hours": 8.41667,
+                            "total_count": null,
+                            "total_efficiency": 0.28,
+                            "assigned_shift": 3,
+                            "total_targets_met": 0
+                        }
+                    ],
+                    "presentMachs": [
+                        "Mach A"
+                    ],
+                    "presentMachDetails": [
+                        {
+                            "MachName": "Mach A",
+                            "target": 60,
+                            "count": 17,
+                            "efficiency": 0.2833,
+                            "operatorID": 2,
+                            "idleTime": 12,
+                            "nonWorking": 120
+                        }
+                    ],
+                    "notPresentMachines": [
+                        "Mach B"
+                    ],
+                    "idleTime": 12,
+                    "nonWorking": 120,
+                    "absentEmployeeDetails": [
+                        {
+                            "employee_id": 1,
+                            "employee_name": "Sample employee",
+                            "rfid": "RFID007",
+                            "password": "wasd",
+                            "total_idle_hours": 0.483333,
+                            "total_working_hours": 9.83333,
+                            "total_count": null,
+                            "total_efficiency": 0.28,
+                            "assigned_shift": 4,
+                            "total_targets_met": 7
+                        }
+                    ]
+                },
+                "2024-10-23": {
+                    "proximity_sum": null,
+                    "target": null,
+                    "absentNames": [],
+                    "notPresentIDS": [],
+                    "notPresentRFIDS": [],
+                    "presentNames": [],
+                    "presentRFIDS": [],
+                    "presentEmployeeDetails": [],
+                    "presentMachs": [],
+                    "presentMachDetails": [],
+                    "notPresentMachines": [],
+                    "idleTime": null,
+                    "nonWorking": null,
+                    "absentEmployeeDetails": []
+                },
+                "2024-10-24": {
+                    "proximity_sum": null,
+                    "target": null,
+                    "absentNames": [],
+                    "notPresentIDS": [],
+                    "notPresentRFIDS": [],
+                    "presentNames": [],
+                    "presentRFIDS": [],
+                    "presentEmployeeDetails": [],
+                    "presentMachs": [],
+                    "presentMachDetails": [],
+                    "notPresentMachines": [],
+                    "idleTime": null,
+                    "nonWorking": null,
+                    "absentEmployeeDetails": []
+                },
+                "2024-10-25": {
+                    "proximity_sum": null,
+                    "target": null,
+                    "absentNames": [],
+                    "notPresentIDS": [],
+                    "notPresentRFIDS": [],
+                    "presentNames": [],
+                    "presentRFIDS": [],
+                    "presentEmployeeDetails": [],
+                    "presentMachs": [],
+                    "presentMachDetails": [],
+                    "notPresentMachines": [],
+                    "idleTime": null,
+                    "nonWorking": null,
+                    "absentEmployeeDetails": []
+                },
+                "2024-10-26": {
+                    "proximity_sum": null,
+                    "target": null,
+                    "absentNames": [],
+                    "notPresentIDS": [],
+                    "notPresentRFIDS": [],
+                    "presentNames": [],
+                    "presentRFIDS": [],
+                    "presentEmployeeDetails": [],
+                    "presentMachs": [],
+                    "presentMachDetails": [],
+                    "notPresentMachines": [],
+                    "idleTime": null,
+                    "nonWorking": null,
+                    "absentEmployeeDetails": []
+                },
+                "2024-10-27": {
+                    "proximity_sum": null,
+                    "target": null,
+                    "absentNames": [],
+                    "notPresentIDS": [],
+                    "notPresentRFIDS": [],
+                    "presentNames": [],
+                    "presentRFIDS": [],
+                    "presentEmployeeDetails": [],
+                    "presentMachs": [],
+                    "presentMachDetails": [],
+                    "notPresentMachines": [],
+                    "idleTime": null,
+                    "nonWorking": null,
+                    "absentEmployeeDetails": []
+                },
+                "2024-10-28": {
+                    "proximity_sum": null,
+                    "target": null,
+                    "absentNames": [],
+                    "notPresentIDS": [],
+                    "notPresentRFIDS": [],
+                    "presentNames": [],
+                    "presentRFIDS": [],
+                    "presentEmployeeDetails": [],
+                    "presentMachs": [],
+                    "presentMachDetails": [],
+                    "notPresentMachines": [],
+                    "idleTime": null,
+                    "nonWorking": null,
+                    "absentEmployeeDetails": []
+                },
+                "2024-10-29": {
+                    "proximity_sum": null,
+                    "target": null,
+                    "absentNames": [],
+                    "notPresentIDS": [],
+                    "notPresentRFIDS": [],
+                    "presentNames": [],
+                    "presentRFIDS": [],
+                    "presentEmployeeDetails": [],
+                    "presentMachs": [],
+                    "presentMachDetails": [],
+                    "notPresentMachines": [],
+                    "idleTime": null,
+                    "nonWorking": null,
+                    "absentEmployeeDetails": []
+                },
+                "2024-10-30": {
+                    "proximity_sum": null,
+                    "target": null,
+                    "absentNames": [],
+                    "notPresentIDS": [],
+                    "notPresentRFIDS": [],
+                    "presentNames": [],
+                    "presentRFIDS": [],
+                    "presentEmployeeDetails": [],
+                    "presentMachs": [],
+                    "presentMachDetails": [],
+                    "notPresentMachines": [],
+                    "idleTime": null,
+                    "nonWorking": null,
+                    "absentEmployeeDetails": []
+                }
+            }
+        }
+        ```
+    2. Failure:  
+        Any other errors
+        ``` json
+        {
+            "msg": "Error will be displayed accordingly"
+        }
+        ```      
